@@ -15,37 +15,35 @@ const phrases = [
 ];
 
 let phraseIndex = 0;
-let yesSize = 18;  // "Иә" батырмасының бастапқы өлшемі
-let noSize = 18;   // "Жоқ" батырмасының бастапқы өлшемі
+let yesSize = 18;
+let noSize = 18;
 
-// "Жоқ" батырмасын басқанда болатын әрекет
+// "Жоқ" батырмасы
 noButton.addEventListener('click', () => {
-    // 1. "ИӘ" батырмасын үлкейтеміз
+    // ИӘ батырмасын үлкейту
     yesSize += 15;
-    yesButton.style.fontSize = ${yesSize}px;
-    yesButton.style.padding = ${yesSize / 2}px ${yesSize}px;
+    yesButton.style.fontSize = `${yesSize}px`;
+    yesButton.style.padding = `${yesSize / 2}px ${yesSize}px`;
 
-    // 2. "ЖОҚ" батырмасын кішірейтеміз (минимум 5px-ке дейін)
+    // ЖОҚ батырмасын кішірейту
     if (noSize > 5) {
         noSize -= 2;
-        noButton.style.fontSize = ${noSize}px;
-        noButton.style.padding = ${noSize / 2}px ${noSize}px;
+        noButton.style.fontSize = `${noSize}px`;
+        noButton.style.padding = `${noSize / 2}px ${noSize}px`;
     }
 
-    // 3. Мәтінді кезекпен өзгертеміз
+    // Мәтінді ауыстыру
     noButton.innerText = phrases[phraseIndex];
     phraseIndex = (phraseIndex + 1) % phrases.length;
 });
 
-// "Иә" батырмасын басқанда болатын әрекет
+// "Иә" батырмасы
 yesButton.addEventListener('click', () => {
     question.innerText = "Урааа! Мен де сені жақсы көремін! ❤️✨";
-    
-    // Жеңіс гифкасын қоямыз
+
     if (mainGif) {
         mainGif.src = "https://media.tenor.com/gU_Pb_7pVmYAAAAi/cute-omg.gif";
     }
-    
-    // Батырмаларды жасырып тастаймыз
+
     document.querySelector('.buttons').style.display = 'none';
 });
