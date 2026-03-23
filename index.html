@@ -54,6 +54,12 @@ img {
 #myPhoto {
     display: none;
     width: 250px;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 /* жүрек */
@@ -84,12 +90,12 @@ img {
     <button id="noButton">Жоқ</button>
 </div>
 
-<!-- 🎵 БІРІНШІ МУЗЫКА (КЕЙІПКЕРІМ) -->
+<!-- 🎵 1. Кейіпкерім (басты бет) -->
 <audio id="music1" loop autoplay>
     <source src="keshikerim.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 🎵 ЕКІНШІ МУЗЫКА (СҰЛУЫМ) -->
+<!-- 🎵 2. Сұлуым (Иә басқанда) -->
 <audio id="music2" loop>
     <source src="suluym.mp3" type="audio/mpeg">
 </audio>
@@ -104,7 +110,21 @@ const myPhoto = document.getElementById('myPhoto');
 const music1 = document.getElementById('music1');
 const music2 = document.getElementById('music2');
 
-// 💓 жүрек
+const phrases = [
+    "Жоқ",
+    "Сенімдісің бе? 🤨",
+    "Өтінемін... 🥺",
+    "Қайта ойланшы!",
+    "Жүрегім ауырып тұр... 💔",
+    "Мұңайтпашы мені...",
+    "Бәрібір ИӘ деп басшы! ✨"
+];
+
+let phraseIndex = 0;
+let yesSize = 18;
+let noSize = 18;
+
+// 💓 жүрек эффект
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -117,7 +137,19 @@ setInterval(createHeart, 300);
 
 // 😈 ЖОҚ
 noButton.addEventListener('click', () => {
-    document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?auto=format&fit=crop&w=1200&q=80')";
+
+    document.body.style.background = "url('https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover";
+
+    yesSize += 10;
+    yesButton.style.fontSize = yesSize + "px";
+
+    if (noSize > 5) {
+        noSize -= 2;
+        noButton.style.fontSize = noSize + "px";
+    }
+
+    noButton.innerText = phrases[phraseIndex];
+    phraseIndex = (phraseIndex + 1) % phrases.length;
 
     const x = Math.random() * 300 - 150;
     const y = Math.random() * 300 - 150;
@@ -127,22 +159,22 @@ noButton.addEventListener('click', () => {
 // 💖 ИӘ
 yesButton.addEventListener('click', () => {
 
-    question.innerText = "Урааа! ❤️";
+    question.innerText = "Урааа! Мен де сені жақсы көремін! ❤️✨";
 
     mainGif.src = "https://media.tenor.com/gU_Pb_7pVmYAAAAi/cute-omg.gif";
 
     document.querySelector('.buttons').style.display = 'none';
 
-    // ⛔ кейіпкерім тоқтату
+    // ⛔ Кейіпкерім тоқтату
     music1.pause();
 
-    // 🎵 сұлуым қосу
+    // 🎵 Сұлуым қосу
     music2.play();
 
     // 🌄 фон
-    document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&q=80')";
+    document.body.style.background = "url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover";
 
-    // 📸 фото
+    // 📸 фото көрсету
     myPhoto.style.display = "block";
 });
 </script>
