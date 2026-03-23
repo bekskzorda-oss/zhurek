@@ -9,7 +9,7 @@
 body {
     text-align: center;
     font-family: Arial, sans-serif;
-    background: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7') no-repeat center/cover;
+    background: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover;
     color: white;
     overflow: hidden;
 }
@@ -30,7 +30,6 @@ button {
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 #yesButton {
@@ -51,7 +50,7 @@ img {
     box-shadow: 0 0 20px black;
 }
 
-/* 💓 жүректер */
+/* жүрек */
 .heart {
     position: fixed;
     bottom: -10px;
@@ -77,18 +76,20 @@ img {
     <button id="noButton">Жоқ</button>
 </div>
 
-<!-- 🎵 музыка -->
-<iframe id="musicFrame" width="0" height="0" allow="autoplay"></iframe>
+<!-- 🎵 MP3 музыка -->
+<audio id="music" loop>
+    <source src="suluym.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const yesButton = document.getElementById('yesButton');
 const noButton = document.getElementById('noButton');
 const question = document.getElementById('question');
 const mainGif = document.getElementById('main-gif');
-const musicFrame = document.getElementById('musicFrame');
+const music = document.getElementById('music');
 
 const phrases = [
-    "Жоқ",
+    "ТҮЙЙЙЙ",
     "Сенімдісің бе? 🤨",
     "Өтінемін... 🥺",
     "Қайта ойланшы!",
@@ -113,7 +114,7 @@ function createHeart() {
 }
 setInterval(createHeart, 300);
 
-// 😈 ЖОҚ
+// 😈 ЖОҚ батырмасы
 noButton.addEventListener('click', () => {
     yesSize += 12;
     yesButton.style.fontSize = yesSize + "px";
@@ -131,7 +132,7 @@ noButton.addEventListener('click', () => {
     noButton.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-// 💖 ИӘ
+// 💖 ИӘ батырмасы
 yesButton.addEventListener('click', () => {
     question.innerText = "Урааа! Мен де сені жақсы көремін! ❤️✨";
     
@@ -139,11 +140,11 @@ yesButton.addEventListener('click', () => {
 
     document.querySelector('.buttons').style.display = 'none';
 
-    // 🎵 музыка
-    musicFrame.src = "https://www.youtube.com/embed/dUHRRsWKSg0?autoplay=1&loop=1&playlist=dUHRRsWKSg0";
+    // 🎵 музыка қосу
+    music.play();
 
-    // 💥 фон ауысады
-    document.body.style.background = "url('https://images.unsplash.com/photo-1492724441997-5dc865305da7') no-repeat center/cover";
+    // фон өзгерту
+    document.body.style.background = "url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover";
 });
 </script>
 
