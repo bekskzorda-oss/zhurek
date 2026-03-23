@@ -9,13 +9,14 @@
 body {
     text-align: center;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ffe6f0, #ffd6e7);
+    background: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7') no-repeat center/cover;
+    color: white;
     overflow: hidden;
 }
 
 h1 {
-    color: #ff4d88;
     margin-top: 40px;
+    text-shadow: 2px 2px 10px black;
 }
 
 .buttons {
@@ -33,46 +34,41 @@ button {
 }
 
 #yesButton {
-    background-color: #4CAF50;
+    background-color: #00c853;
     color: white;
 }
 
 #noButton {
-    background-color: #f44336;
+    background-color: #d50000;
     color: white;
     position: relative;
 }
 
 img {
     margin-top: 20px;
-    width: 200px;
+    width: 220px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px black;
 }
 
-/* 💓 Жүректер */
+/* 💓 жүректер */
 .heart {
     position: fixed;
     bottom: -10px;
-    color: red;
     font-size: 20px;
     animation: floatUp 5s linear infinite;
 }
 
 @keyframes floatUp {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100vh);
-        opacity: 0;
-    }
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<h1 id="question">Толғанай сен мені жақсы көресің бе? 💖</h1>
+<h1 id="question">Сен мені жақсы көресің бе? 💖</h1>
 
 <img id="main-gif" src="https://media.tenor.com/6XbJ3bN0s7wAAAAi/cute-love.gif">
 
@@ -81,17 +77,15 @@ img {
     <button id="noButton">Жоқ</button>
 </div>
 
-<!-- 🎵 Музыка -->
-<audio id="music" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-</audio>
+<!-- 🎵 музыка -->
+<iframe id="musicFrame" width="0" height="0" allow="autoplay"></iframe>
 
 <script>
 const yesButton = document.getElementById('yesButton');
 const noButton = document.getElementById('noButton');
 const question = document.getElementById('question');
 const mainGif = document.getElementById('main-gif');
-const music = document.getElementById('music');
+const musicFrame = document.getElementById('musicFrame');
 
 const phrases = [
     "Жоқ",
@@ -107,53 +101,49 @@ let phraseIndex = 0;
 let yesSize = 18;
 let noSize = 18;
 
-// 💓 Жүрек генерациясы
+// 💓 жүрек
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerText = "💖";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
+    setTimeout(() => heart.remove(), 5000);
 }
-
 setInterval(createHeart, 300);
 
-// 😈 ЖОҚ батырмасы
+// 😈 ЖОҚ
 noButton.addEventListener('click', () => {
     yesSize += 12;
     yesButton.style.fontSize = yesSize + "px";
-    yesButton.style.padding = (yesSize / 2) + "px " + yesSize + "px";
 
     if (noSize > 5) {
         noSize -= 2;
         noButton.style.fontSize = noSize + "px";
-        noButton.style.padding = (noSize / 2) + "px " + noSize + "px";
     }
 
     noButton.innerText = phrases[phraseIndex];
     phraseIndex = (phraseIndex + 1) % phrases.length;
 
-    // Қашу эффекті
     const x = Math.random() * 300 - 150;
     const y = Math.random() * 300 - 150;
     noButton.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-// 💖 ИӘ батырмасы
+// 💖 ИӘ
 yesButton.addEventListener('click', () => {
     question.innerText = "Урааа! Мен де сені жақсы көремін! ❤️✨";
-
+    
     mainGif.src = "https://media.tenor.com/gU_Pb_7pVmYAAAAi/cute-omg.gif";
 
     document.querySelector('.buttons').style.display = 'none';
 
-    // Музыка қосу
-    music.play();
+    // 🎵 музыка
+    musicFrame.src = "https://www.youtube.com/embed/dUHRRsWKSg0?autoplay=1&loop=1&playlist=dUHRRsWKSg0";
+
+    // 💥 фон ауысады
+    document.body.style.background = "url('https://images.unsplash.com/photo-1492724441997-5dc865305da7') no-repeat center/cover";
 });
 </script>
 
