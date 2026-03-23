@@ -9,7 +9,7 @@ let yesSize = 18;
 noButton.addEventListener('click', () => {
     // "Иә" батырмасын үлкейтеміз
     yesSize += 20;
-    yesButton.style.fontSize = ${yesSize}px;
+yesButton.style.fontSize = ${yesSize}px;
     yesButton.style.padding = ${yesSize/2}px ${yesSize}px;
     
     // Мәтінді өзгерту (ерікті түрде)
