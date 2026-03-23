@@ -2,55 +2,77 @@
 <html lang="kk">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💖 Love Page</title>
 
 <style>
-    body {
-        text-align: center;
-        font-family: Arial, sans-serif;
-        background: #ffe6f0;
-        margin-top: 50px;
-    }
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffe6f0, #ffd6e7);
+    overflow: hidden;
+}
 
-    h1 {
-        color: #ff4d88;
-    }
+h1 {
+    color: #ff4d88;
+    margin-top: 40px;
+}
 
-    .buttons {
-        margin-top: 20px;
-    }
+.buttons {
+    margin-top: 20px;
+}
 
-    button {
-        font-size: 18px;
-        padding: 10px 20px;
-        margin: 10px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-    #yesButton {
-        background-color: #4CAF50;
-        color: white;
-    }
+#yesButton {
+    background-color: #4CAF50;
+    color: white;
+}
 
-    #noButton {
-        background-color: #f44336;
-        color: white;
-        position: relative;
-    }
+#noButton {
+    background-color: #f44336;
+    color: white;
+    position: relative;
+}
 
-    img {
-        margin-top: 20px;
-        width: 200px;
+img {
+    margin-top: 20px;
+    width: 200px;
+}
+
+/* 💓 Жүректер */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    color: red;
+    font-size: 20px;
+    animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
     }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<h1 id="question">Сен мені жақсы көресің бе? 💖</h1>
+<h1 id="question">Толғанай сен мені жақсы көресің бе? 💖</h1>
 
 <img id="main-gif" src="https://media.tenor.com/6XbJ3bN0s7wAAAAi/cute-love.gif">
 
@@ -59,11 +81,17 @@
     <button id="noButton">Жоқ</button>
 </div>
 
+<!-- 🎵 Музыка -->
+<audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 const yesButton = document.getElementById('yesButton');
 const noButton = document.getElementById('noButton');
 const question = document.getElementById('question');
 const mainGif = document.getElementById('main-gif');
+const music = document.getElementById('music');
 
 const phrases = [
     "Жоқ",
@@ -79,35 +107,53 @@ let phraseIndex = 0;
 let yesSize = 18;
 let noSize = 18;
 
+// 💓 Жүрек генерациясы
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+
+setInterval(createHeart, 300);
+
+// 😈 ЖОҚ батырмасы
 noButton.addEventListener('click', () => {
-    // ИӘ батырмасы үлкейеді
-    yesSize += 10;
+    yesSize += 12;
     yesButton.style.fontSize = yesSize + "px";
     yesButton.style.padding = (yesSize / 2) + "px " + yesSize + "px";
 
-    // ЖОҚ батырмасы кішірейеді
     if (noSize > 5) {
         noSize -= 2;
         noButton.style.fontSize = noSize + "px";
         noButton.style.padding = (noSize / 2) + "px " + noSize + "px";
     }
 
-    // Мәтін ауысады
     noButton.innerText = phrases[phraseIndex];
     phraseIndex = (phraseIndex + 1) % phrases.length;
 
-    // 😈 Қашып кету эффекті
+    // Қашу эффекті
     const x = Math.random() * 300 - 150;
     const y = Math.random() * 300 - 150;
     noButton.style.transform = `translate(${x}px, ${y}px)`;
 });
 
+// 💖 ИӘ батырмасы
 yesButton.addEventListener('click', () => {
     question.innerText = "Урааа! Мен де сені жақсы көремін! ❤️✨";
-    
+
     mainGif.src = "https://media.tenor.com/gU_Pb_7pVmYAAAAi/cute-omg.gif";
 
     document.querySelector('.buttons').style.display = 'none';
+
+    // Музыка қосу
+    music.play();
 });
 </script>
 
