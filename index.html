@@ -12,6 +12,7 @@ body {
     background: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover;
     color: white;
     overflow: hidden;
+    transition: background 1s ease;
 }
 
 h1 {
@@ -50,6 +51,19 @@ img {
     box-shadow: 0 0 20px black;
 }
 
+#myPhoto {
+    display: none;
+    width: 250px;
+    margin-top: 20px;
+    animation: fadeIn 1s ease;
+}
+
+/* fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
 /* жүрек */
 .heart {
     position: fixed;
@@ -71,12 +85,15 @@ img {
 
 <img id="main-gif" src="https://media.tenor.com/6XbJ3bN0s7wAAAAi/cute-love.gif">
 
+<!-- 📸 сенің фото -->
+<img id="myPhoto" src="me.jpg">
+
 <div class="buttons">
     <button id="yesButton">Иә</button>
     <button id="noButton">Жоқ</button>
 </div>
 
-<!-- 🎵 MP3 музыка -->
+<!-- 🎵 музыка -->
 <audio id="music" loop>
     <source src="suluym.mp3" type="audio/mpeg">
 </audio>
@@ -86,10 +103,11 @@ const yesButton = document.getElementById('yesButton');
 const noButton = document.getElementById('noButton');
 const question = document.getElementById('question');
 const mainGif = document.getElementById('main-gif');
+const myPhoto = document.getElementById('myPhoto');
 const music = document.getElementById('music');
 
 const phrases = [
-    "ТҮЙЙЙЙ",
+    "Жоқ",
     "Сенімдісің бе? 🤨",
     "Өтінемін... 🥺",
     "Қайта ойланшы!",
@@ -109,12 +127,11 @@ function createHeart() {
     heart.innerText = "💖";
     heart.style.left = Math.random() * 100 + "vw";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 5000);
 }
 setInterval(createHeart, 300);
 
-// 😈 ЖОҚ батырмасы
+// 😈 ЖОҚ
 noButton.addEventListener('click', () => {
     yesSize += 12;
     yesButton.style.fontSize = yesSize + "px";
@@ -132,7 +149,7 @@ noButton.addEventListener('click', () => {
     noButton.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-// 💖 ИӘ батырмасы
+// 💖 ИӘ
 yesButton.addEventListener('click', () => {
     question.innerText = "Урааа! Мен де сені жақсы көремін! ❤️✨";
     
@@ -140,11 +157,14 @@ yesButton.addEventListener('click', () => {
 
     document.querySelector('.buttons').style.display = 'none';
 
-    // 🎵 музыка қосу
+    // 🎵 музыка
     music.play();
 
-    // фон өзгерту
-    document.body.style.background = "url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover";
+    // 🌄 фон ауыстыру
+    document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&q=80')";
+
+    // 📸 фото көрсету
+    myPhoto.style.display = "block";
 });
 </script>
 
