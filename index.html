@@ -1,22 +1,115 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be my Valentine?</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>💖 Love Page</title>
+
+<style>
+    body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        background: #ffe6f0;
+        margin-top: 50px;
+    }
+
+    h1 {
+        color: #ff4d88;
+    }
+
+    .buttons {
+        margin-top: 20px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #yesButton {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    #noButton {
+        background-color: #f44336;
+        color: white;
+        position: relative;
+    }
+
+    img {
+        margin-top: 20px;
+        width: 200px;
+    }
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div id="gif-container">
-            <img id="main-gif" src="https://media.tenor.com/j89v99Y9G6IAAAAi/bear-kiss-bear-love.gif" alt="Bear">
-        </div>
-        <h1 id="question"> Толғанай мені ұнатасын ба? ❤️</h1>
-        <div class="buttons">
-            <button id="yesButton">Иә</button>
-            <button id="noButton">Жоқ</button>
-        </div>
-    </div>
-    <script src="script.js"></script>
+
+<h1 id="question">Сен мені жақсы көресің бе? 💖</h1>
+
+<img id="main-gif" src="https://media.tenor.com/6XbJ3bN0s7wAAAAi/cute-love.gif">
+
+<div class="buttons">
+    <button id="yesButton">Иә</button>
+    <button id="noButton">Жоқ</button>
+</div>
+
+<script>
+const yesButton = document.getElementById('yesButton');
+const noButton = document.getElementById('noButton');
+const question = document.getElementById('question');
+const mainGif = document.getElementById('main-gif');
+
+const phrases = [
+    "Жоқ",
+    "Сенімдісің бе? 🤨",
+    "Өтінемін... 🥺",
+    "Қайта ойланшы!",
+    "Жүрегім ауырып тұр... 💔",
+    "Мұңайтпашы мені...",
+    "Бәрібір ИӘ деп басшы! ✨"
+];
+
+let phraseIndex = 0;
+let yesSize = 18;
+let noSize = 18;
+
+noButton.addEventListener('click', () => {
+    // ИӘ батырмасы үлкейеді
+    yesSize += 10;
+    yesButton.style.fontSize = yesSize + "px";
+    yesButton.style.padding = (yesSize / 2) + "px " + yesSize + "px";
+
+    // ЖОҚ батырмасы кішірейеді
+    if (noSize > 5) {
+        noSize -= 2;
+        noButton.style.fontSize = noSize + "px";
+        noButton.style.padding = (noSize / 2) + "px " + noSize + "px";
+    }
+
+    // Мәтін ауысады
+    noButton.innerText = phrases[phraseIndex];
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+
+    // 😈 Қашып кету эффекті
+    const x = Math.random() * 300 - 150;
+    const y = Math.random() * 300 - 150;
+    noButton.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+yesButton.addEventListener('click', () => {
+    question.innerText = "Урааа! Мен де сені жақсы көремін! ❤️✨";
+    
+    mainGif.src = "https://media.tenor.com/gU_Pb_7pVmYAAAAi/cute-omg.gif";
+
+    document.querySelector('.buttons').style.display = 'none';
+});
+</script>
+
 </body>
 </html>
